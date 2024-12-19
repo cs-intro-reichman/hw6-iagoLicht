@@ -47,14 +47,8 @@ public class Runigram {
 			}
 
 		}
+		return image;
 
-		// Reads the RGB values from the file into the image array.
-		// For each pixel (i,j), reads 3 values from the file,
-		// creates from the 3 colors a new Color object, and
-		// makes pixel (i,j) refer to that object.
-		//// Replace the following statement with your code.
-
-		return null;
 	}
 
 	// Prints the RGB values of a given color.
@@ -75,6 +69,13 @@ public class Runigram {
 	private static void print(Color[][] image) {
 		//// Replace this comment with your code
 		//// Notice that all you have to so is print every element (i,j) of the array using the print(Color) function.
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length; j++) {
+				print(image[i][j]);
+			}
+			System.out.println();
+		}
+
 	}
 
 	/**
@@ -82,8 +83,16 @@ public class Runigram {
 	 * image.
 	 */
 	public static Color[][] flippedHorizontally(Color[][] image) {
-		//// Replace the following statement with your code
-		return null;
+		int numRows = image.length;
+		int numCols = image[0].length;
+
+		Color[][] flipped = new Color[numRows][numCols];
+		for (int r = 0; r < image.length; r++) {
+			for (int c = 0; c < image[0].length; c++) {
+				flipped[r][numCols - 1 - c] = image[r][c];
+			}
+		}
+		return flipped;
 	}
 
 	/**
