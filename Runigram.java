@@ -154,11 +154,11 @@ public class Runigram {
 		double scaleW = w0 / w;
 		double scaleH = h0 / h;
 		Color[][] scaledImage = new Color[w][h];
-		for (int i = 0; i < scaleW; i++) {
-			for (int j = 0; j < scaleH; j++) {
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
 				double ii = i * scaleH;
 				double jj = j * scaleW;
-				scaledImage[i][j] = image[(int) ii][(int) jj];
+				scaledImage[i][j] = image[(int) jj][(int) ii];
 			}
 		}
 
