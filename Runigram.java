@@ -86,21 +86,29 @@ public class Runigram {
 		int numRows = image.length;
 		int numCols = image[0].length;
 
-		Color[][] flipped = new Color[numRows][numCols];
+		Color[][] flippedHorizon = new Color[numRows][numCols];
 		for (int r = 0; r < image.length; r++) {
 			for (int c = 0; c < image[0].length; c++) {
-				flipped[r][numCols - 1 - c] = image[r][c];
+				flippedHorizon[r][numCols - 1 - c] = image[r][c];
 			}
 		}
-		return flipped;
+		return flippedHorizon;
 	}
 
 	/**
 	 * Returns an image which is the vertically flipped version of the given image.
 	 */
 	public static Color[][] flippedVertically(Color[][] image) {
-		//// Replace the following statement with your code
-		return null;
+		int numRows = image.length;
+		int numCols = image[0].length;
+
+		Color[][] flippedVertical = new Color[numRows][numCols];
+		for (int c = 0; c < numCols; c++) {
+			for (int r = 0; r < numRows; r++) {
+				flippedVertical[r][c] = image[numRows - r - 1][c];
+			}
+		}
+		return flippedVertical;
 	}
 
 	// Computes the luminance of the RGB values of the given pixel, using the
@@ -109,16 +117,29 @@ public class Runigram {
 	// consisting
 	// the three values r = lum, g = lum, b = lum.
 	private static Color luminance(Color pixel) {
-		//// Replace the following statement with your code
-		return null;
+		int r = pixel.getRed();
+		int g = pixel.getGreen();
+		int b = pixel.getBlue();
+		int grey = (int) (0.299 * r + 0.587 * g + 0.114 * b);
+		Color greyPixel = new Color(grey, grey, grey);
+		return greyPixel;
 	}
 
 	/**
 	 * Returns an image which is the grayscaled version of the given image.
 	 */
 	public static Color[][] grayScaled(Color[][] image) {
-		//// Replace the following statement with your code
-		return null;
+		int row = image.length;
+		int cols = image[0].length;
+		Color[][] greyArray = new Color[row][cols];
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < cols; j++) {
+				greyArray[i][j] = luminance(image[i][j]);
+
+			}
+
+		}
+		return greyArray;
 	}
 
 	/**
@@ -126,7 +147,21 @@ public class Runigram {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
-		//// Replace the following statement with your code
+		int h0 = image.length;
+		int w0 = image[0].length;
+		int h = width;
+		int w = height;
+		double scaleW = w0 / w;
+		double scaleH = h0 / h;
+		Color[][] scaledImage = new Color[w][h];
+		for (int i = 0; i < scaleW; i++) {
+			for (int j = 0; j < scaleH; j++) {
+				double ii = i * scaleH;
+				double jj = j * scaleW;
+				scaledImage[i][j] = image[(int) ii][(int) jj];
+			}
+		}
+
 		return null;
 	}
 
