@@ -162,7 +162,7 @@ public class Runigram {
 			}
 		}
 
-		return null;
+		return scaledImage;
 	}
 
 	/**
@@ -175,8 +175,18 @@ public class Runigram {
 	 * values in the two input color.
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
-		//// Replace the following statement with your code
-		return null;
+		int R1 = c1.getRed();
+		int G1 = c1.getGreen();
+		int B1 = c1.getBlue();
+		int R2 = c2.getRed();
+		int G2 = c2.getGreen();
+		int B2 = c2.getBlue();
+		int newR = (int) (alpha * R1 + (1 - alpha) * R2);
+		int newG = (int) (alpha * G1 + (1 - alpha) * G2);
+		int newB = (int) (alpha * B1 + (1 - alpha) * B2);
+		Color c3 = new Color(newR, newG, newB);
+
+		return c3;
 	}
 
 	/**
@@ -188,8 +198,17 @@ public class Runigram {
 	 * The two images must have the same dimensions.
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
-		//// Replace the following statement with your code
-		return null;
+		int numCols = image1[0].length;
+		int numRows = image1.length;
+		// Creates the flipped image array
+		Color[][] newImage = new Color[numRows][numCols];
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				newImage[i][j] = blend(image1[i][j], image2[i][j], alpha);
+
+			}
+		}
+		return newImage;
 	}
 
 	/**
@@ -199,7 +218,19 @@ public class Runigram {
 	 * of the source image.
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
-		//// Replace this comment with your code
+		int cols = source[0].length;
+		int rows = source.length;
+		double alpha = 0;
+		Color[][] newImage = new Color[rows][cols];
+		Color[][] image2 = new Color[rows][cols];
+		image2 = scaled(target, cols, rows);
+		for (int i = 0; i < n; i++) {
+			alpha = (double) (n - i) / n;
+			newImage = blend(source, image2, alpha);
+
+			Runigram.display(newImage);
+			StdDraw.pause(100);
+		}
 	}
 
 	/** Creates a canvas for the given image. */
